@@ -2,11 +2,11 @@ require 'watir-webdriver'
 require 'cucumber'
 
 def browser_name
-    (ENV['BROWSER'] ||= 'firefox').downcase.to_sym
+    (ENV['BROWSER'] ||= 'firefox').downcase.to_sym  #setting default browser to be firefox
 end
 
 def environment
-    (ENV['ENVIRONMENT'] ||= 'prod').downcase.to_sym
+    (ENV['ENVIRONMENT'] ||= 'prod').downcase.to_sym  # here I'm setting the default env as 'prod' but it can take a command line argument.
 end
 
 Before do |scenario|
@@ -26,9 +26,9 @@ Before do |scenario|
   p "Starting #{scenario}"
   if environment == :int
     @browser = Watir::Browser.new browser_name
-    @browser.goto "http://sandbox.amazon.com"
-    @browser.text_field(:id=>'username').set "test"
-    @browser.text_field(:id=>'password').set "test1234"
+    @browser.goto "http://sandbox.amazon.com"  # this is fake. an example test Env only
+    @browser.text_field(:id=>'username').set "test"  #again, fake data. just an example of logging into a test env.
+    @browser.text_field(:id=>'password').set "test1234" # again more fake data, as an example of logging into a test env.
     @browser.button(:id => 'submit').click
 
   elsif environment == :local
